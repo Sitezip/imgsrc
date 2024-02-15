@@ -1,6 +1,9 @@
 const gitDataFetcher = function(url,dir){
 
     const myHeaders = new Headers();
+    if(api.token){
+        //myHeaders.append("Authorization", "Bearer " + api.token);
+    }
     myHeaders.append("Cookie", "_octo=GH1.1.1855976736.1707942526; logged_in=no");
 
     const requestOptions = {
@@ -18,7 +21,6 @@ const gitDataFetcher = function(url,dir){
 
 const displayData = function(obj,dir){
     dir = dir ? dir + '/' : '/';
-    console.log(obj,dir);
     const list = document.getElementById('list');
     const nav  = document.getElementById('nav');
     if(obj.hasOwnProperty('message')){
@@ -62,6 +64,7 @@ site.baseUrl = 'https://imgsrc.cloud';
 //api data
 const api   = {};
 api.baseUrl = 'https://api.github.com';
+api.zapUrl  = 'https://zzzap.io/Utilities/formatting/zcd-read?text=zCd-3132080370e1ab2623552e63fb1113a0';
 
 //target data
 const config  = {};
@@ -69,6 +72,15 @@ config.acct   = 'Saran-pariyar'; //'quasicodo42'; //
 config.repo   = 'imgsrc'; //'HTMW'; //
 config.branch = 'main';
 
+//storage
 const response = {config:config,response:[]};
 
-gitDataFetcher(api.baseUrl + '/users/' + config.acct + '/repos');
+fetch(api.zapUrl)
+    .then((response) => response.json())
+    .then((result) => gitInit(result))
+    .catch((error) => console.error(error));
+
+const gitInit = function(response){
+    api.token = response.response || null;
+    gitDataFetcher(api.baseUrl + '/users/' + config.acct + '/repos');
+}
