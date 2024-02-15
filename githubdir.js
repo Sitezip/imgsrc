@@ -2,7 +2,7 @@ const gitDataFetcher = function(url,dir){
 
     const myHeaders = new Headers();
     if(api.token){
-        //myHeaders.append("Authorization", "Bearer " + api.token);
+        myHeaders.append("Authorization", "Bearer " + api.token);
     }
     myHeaders.append("Cookie", "_octo=GH1.1.1855976736.1707942526; logged_in=no");
 
@@ -64,7 +64,7 @@ site.baseUrl = 'https://imgsrc.cloud';
 //api data
 const api   = {};
 api.baseUrl = 'https://api.github.com';
-api.zapUrl  = 'https://zzzap.io/Utilities/formatting/zcd-read?text=zCd-3132080370e1ab2623552e63fb1113a0';
+api.zapUrl  = 'https://zzzap.io/Utilities/formatting/zcd-read/text/zCd-4e687178e45a5a2-cdb410601ac7fb706';
 
 //target data
 const config  = {};
