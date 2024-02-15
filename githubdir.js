@@ -2,6 +2,7 @@ const gitDataFetcher = function(url,dir){
 
     const myHeaders = new Headers();
     myHeaders.append("Cookie", "_octo=GH1.1.1855976736.1707942526; logged_in=no");
+    myHeaders.append("Authorization", "Bearer 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");
 
     const requestOptions = {
         method: "GET",
@@ -20,16 +21,26 @@ const displayData = function(obj,dir){
     dir = dir ? dir + '/' : '/';
     console.log(obj,dir);
     const list = document.getElementById('list');
+    const nav  = document.getElementById('nav');
+    if(obj.hasOwnProperty('message')){
+        const msg = document.createTextNode(obj.message);
+        (nav || list).appendChild(msg);
+        return;
+    }
     (obj.tree || obj).forEach(function(data){
         if(data.hasOwnProperty('git_url') && data.name === config.repo){
             gitDataFetcher(api.baseUrl + '/repos/' + config.acct + '/' + data.name + '/branches'); // {/branch}
         }else if(data.hasOwnProperty('commit') && data.name === config.branch){
             gitDataFetcher(api.baseUrl + '/repos/' + config.acct + '/' + config.repo + '/git/trees/' + data.commit.sha); // {/sha}
         }else if(data.hasOwnProperty('type') && data.type === 'tree'){
-            // const li  = document.createElement('li');
-            // const txt = document.createTextNode(data.path);
-            // li.appendChild(txt);
-            // list.appendChild(li);
+            if(nav && !data.path.includes('.idea')){
+                const a     = document.createElement('a');
+                a.href      = site.baseUrl + dir + data.path;
+                a.innerHTML = data.path;
+                const sp    = document.createTextNode(" ");
+                nav.appendChild(a);
+                nav.appendChild(sp);
+            }
             if(window.location.pathname.includes(data.path)){
                 gitDataFetcher(data.url,dir + data.path);
             }
