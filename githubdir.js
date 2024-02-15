@@ -2,7 +2,6 @@ const gitDataFetcher = function(url,dir){
 
     const myHeaders = new Headers();
     myHeaders.append("Cookie", "_octo=GH1.1.1855976736.1707942526; logged_in=no");
-    //myHeaders.append("Authorization", "Bearer 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");
 
     const requestOptions = {
         method: "GET",
