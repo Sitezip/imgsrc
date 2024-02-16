@@ -28,6 +28,9 @@ const displayData = function(obj,dir){
         (nav || list).appendChild(msg);
         return;
     }
+    if(obj.hasOwnProperty('git_url')){
+        obj = [obj];
+    }
     (obj.tree || obj).forEach(function(data){
         if(data.hasOwnProperty('git_url') && data.name === config.repo){
             gitDataFetcher(api.baseUrl + '/repos/' + config.acct + '/' + data.name + '/branches'); // {/branch}
@@ -64,7 +67,7 @@ site.baseUrl = 'https://imgsrc.cloud';
 //api data
 const api   = {};
 api.baseUrl = 'https://api.github.com';
-api.zapUrl  = 'https://zzzap.io/Utilities/formatting/zcd-read/text/zCd-4e687178e45a5a2-cdb410601ac7fb706';
+api.zapUrl  = 'https://zzzap.io/Utilities/formatting/zcd-read/text/zCd-88003555d757a02a3a3766a1da08c37f';
 
 //target data
 const config  = {};
@@ -82,5 +85,6 @@ fetch(api.zapUrl)
 
 const gitInit = function(response){
     api.token = response.response || null;
-    gitDataFetcher(api.baseUrl + '/users/' + config.acct + '/repos');
+    //gitDataFetcher(api.baseUrl + '/users/' + config.acct + '/repos');
+    gitDataFetcher(api.baseUrl + '/repos/' + config.acct + '/' + config.repo);
 }
