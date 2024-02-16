@@ -48,10 +48,13 @@ const displayData = function(obj,dir){
             if(window.location.pathname.includes(data.path)){
                 gitDataFetcher(data.url,dir + data.path);
             }
-        }else if(data.hasOwnProperty('path') && !data.path.includes('git') && !data.path.includes('.md') && !data.path.includes('.htm') && !data.path.includes('.xml') && !data.path.includes('.iml') && !data.path.includes('.webmanifest')){
+        }else if(data.hasOwnProperty('path') && !data.path.includes('git') && !data.path.includes('.cpt') && !data.path.includes('.md') && !data.path.includes('.htm') && !data.path.includes('.xml') && !data.path.includes('.iml') && !data.path.includes('.webmanifest')){
             const a     = document.createElement('a');
             a.href      = site.baseUrl + dir + data.path;
             a.innerHTML = site.baseUrl + dir + data.path;
+            a.addEventListener('mouseover', function() {
+                document.getElementById('imgsrc').src = this.href;
+            });
             response.response.push(site.baseUrl + dir + data.path);
             const li = document.createElement('li');
             li.appendChild(a);
