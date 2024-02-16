@@ -37,7 +37,7 @@ const displayData = function(obj,dir){
         }else if(data.hasOwnProperty('commit') && data.name === config.branch){
             gitDataFetcher(api.baseUrl + '/repos/' + config.acct + '/' + config.repo + '/git/trees/' + data.commit.sha); // {/sha}
         }else if(data.hasOwnProperty('type') && data.type === 'tree'){
-            if(nav && !data.path.includes('.idea')){
+            if(nav && !data.path.includes('.idea') && !data.path.includes('_template')){
                 const a     = document.createElement('a');
                 a.href      = site.baseUrl + dir + data.path;
                 a.innerHTML = data.path;
