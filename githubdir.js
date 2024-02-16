@@ -55,6 +55,9 @@ const displayData = function(obj,dir){
             a.addEventListener('mouseover', function() {
                 document.getElementById('imgsrc').src = this.href;
             });
+            a.addEventListener('mouseout', function() {
+                document.getElementById('imgsrc').src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+            });
             response.response.push(site.baseUrl + dir + data.path);
             const li = document.createElement('li');
             li.appendChild(a);
