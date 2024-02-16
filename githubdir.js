@@ -41,9 +41,9 @@ const displayData = function(obj,dir){
                 const a     = document.createElement('a');
                 a.href      = site.baseUrl + dir + data.path;
                 a.innerHTML = data.path;
-                const sp    = document.createTextNode(" ");
+                const delim = document.createTextNode(" ");
                 nav.appendChild(a);
-                nav.appendChild(sp);
+                nav.appendChild(delim);
             }
             if(window.location.pathname.includes(data.path)){
                 gitDataFetcher(data.url,dir + data.path);
@@ -54,9 +54,11 @@ const displayData = function(obj,dir){
             a.innerHTML = site.baseUrl + dir + data.path;
             a.addEventListener('mouseover', function() {
                 document.getElementById('imgsrc').src = this.href;
+                document.getElementById('imgsrc-dk').src = this.href;
             });
             a.addEventListener('mouseout', function() {
                 document.getElementById('imgsrc').src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+                document.getElementById('imgsrc-dk').src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
             });
             response.response.push(site.baseUrl + dir + data.path);
             const li = document.createElement('li');
