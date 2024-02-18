@@ -41,28 +41,47 @@ const displayData = function(obj,dir){
                 const a     = document.createElement('a');
                 a.href      = site.baseUrl + dir + data.path;
                 a.innerHTML = data.path;
+                a.classList.add("me-1");
+                a.classList.add("text-dark");
                 const delim = document.createTextNode(" ");
                 nav.appendChild(a);
+                nav.appendChild(delim);
+                const l  = document.createElement('a');
+                l.href      = 'https://' + data.path;
+                l.innerHTML = '&#x21B1;';
+                l.classList.add("me-1");
+                l.classList.add("small");
+                l.classList.add("text-muted");
+                nav.appendChild(l);
                 nav.appendChild(delim);
             }
             if(window.location.pathname.includes(data.path)){
                 gitDataFetcher(data.url,dir + data.path);
+                response.count++;
             }
         }else if(data.hasOwnProperty('path') && !data.path.includes('git') && !data.path.includes('.cpt') && !data.path.includes('.md') && !data.path.includes('.htm') && !data.path.includes('.xml') && !data.path.includes('.iml') && !data.path.includes('.webmanifest')){
+            const l     = document.createElement('a');
+            l.href      = site.baseUrl + dir + data.path;
+            l.innerHTML = '&#x21DD;';
+            l.classList.add("me-1");
+            l.classList.add("text-muted");
             const a     = document.createElement('a');
             a.href      = site.baseUrl + dir + data.path;
             a.innerHTML = site.baseUrl + dir + data.path;
-            a.addEventListener('mouseover', function() {
+            a.classList.add("me-1");
+            a.classList.add("text-dark");
+            l.addEventListener('mouseover', function() {
                 document.getElementById('imgsrc').src = this.href;
                 document.getElementById('imgsrc-dk').src = this.href;
             });
-            a.addEventListener('mouseout', function() {
+            l.addEventListener('mouseout', function() {
                 document.getElementById('imgsrc').src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
                 document.getElementById('imgsrc-dk').src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
             });
             response.response.push(site.baseUrl + dir + data.path);
             const li = document.createElement('li');
             li.appendChild(a);
+            li.appendChild(l);
             list.appendChild(li);
         }
     })
@@ -84,7 +103,7 @@ config.repo   = 'imgsrc'; //'HTMW'; //
 config.branch = 'main';
 
 //storage
-const response = {config:config,response:[]};
+const response = {config:config,response:[],count:0};
 
 fetch(api.zapUrl)
     .then((response) => response.json())
