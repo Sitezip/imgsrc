@@ -1,0 +1,18 @@
+<main class="container page">
+    <div class="toolbar">
+        <h1 class="page-title">{{dir}}</h1>
+        <span id="count" class="text-muted small"></span>
+    </div>
+    <div class="dir-body">
+        <ul id="list" class="file-list"></ul>
+        <aside class="preview" aria-label="Image preview">
+            <div class="preview-bar">
+                <span id="preview-name" class="preview-name small">Hover a row or press the eye to preview</span>
+                <button type="button" id="preview-copy" class="icon-btn" title="Copy URL" aria-label="Copy URL" hidden></button>
+                <button type="button" id="preview-close" class="icon-btn preview-close" title="Close preview" aria-label="Close preview">&times;</button>
+            </div>
+            <div class="preview-pane preview-light"><img id="imgsrc" alt="preview on light background"></div>
+            <div class="preview-pane preview-dark"><img id="imgsrc-dk" alt="preview on dark background"></div>
+        </aside>
+    </div>
+</main>
