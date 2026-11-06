@@ -12,7 +12,7 @@
     };
     var config = { acct: 'Saran-pariyar', repo: 'imgsrc', branch: 'main' };
 
-    var NAV_EXCLUDE  = ['.idea', '_template', '_layout'];
+    var NAV_EXCLUDE  = ['.idea', '.vscode', '_template', '_layout'];
     var FILE_EXCLUDE = ['git', '.cpt', '.md', '.htm', '.xml', '.iml', '.webmanifest', '.js', '.css'];
 
     var ICON = {
